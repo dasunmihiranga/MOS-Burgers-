@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+            flex-direction: row;
+            gap: 20px;
+            
+        }
+
+        .text-overlay {
+           
+            text-align: center;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            animation: fadeIn 3s ease-in-out;
+        }
+        .text-overlay span {
+            display: block;
+            margin: 0.5rem 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .text-overlay{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        .title{
+            font-size: 3.5rem;
+            
+        }
+        .description{
+            font-size: 1.2rem;
+            font-weight: normal;
+            margin-left: 1rem;
+            max-width: 500px;
+            text-align: justify;
+            
+        }
+        .pic img{
+            width:600px;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 2rem;
+
+        }
+        
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        
+        <div class="text-overlay">
+            <div class="title">
+                <span>Welcome to MOS Burgers</span>
+            </div>
+            <div class="description">
+                <span>Indulge in our mouthwatering burgers, hearty submarine sandwiches, crispy fries, and refreshing drinks. Every bite is crafted with fresh ingredients and bold flavors. Dive into an epic dining experience and discover why Mos Burger Shop is your go-to destination for delicious eats.</span>
+
+            </div>
+            
+        </div>
+        <div class="pic">
+            <img src="Images/Burger.png" alt="">
+        </div>
+    </div>
+</body>
+</html>
