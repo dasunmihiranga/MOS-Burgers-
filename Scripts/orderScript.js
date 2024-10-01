@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const orderTable = document.getElementById('orderTable');
-    // Retrieve orders from localStorage
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
-
     
     let body =`<tr>
                 <th>#</th>
@@ -32,15 +30,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// function saveOrdersToLocalStorage(orders) {
-//     localStorage.setItem('orders', JSON.stringify(orders));
-// }
-
-// function addOrder(newOrder) {
-//     // Retrieve existing orders from localStorage
-//     let orders = JSON.parse(localStorage.getItem('orders')) || [];
-//     // Add the new order to the array
-//     orders.push(newOrder);
-//     // Save the updated orders array to localStorage
-//     saveOrdersToLocalStorage(orders);
-// }

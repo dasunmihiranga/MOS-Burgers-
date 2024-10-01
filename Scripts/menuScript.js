@@ -52,20 +52,6 @@ let items = [
 let cart = [];
 let orders = JSON.parse(localStorage.getItem('orders')) || []; // Array to store all orders
 
-// function loadItemsArray(){
-//     fetch('json/items.json')
-//     .then(response => response.json())
-//     .then(data=>{
-//         data.forEach(item => {
-//             items.push(item);
-//         })
-//     })
-// }
-// console.log(items);
-// loadItemsArray();
-
-
-
 function renderMenu(items) {
     
     const menuContent = document.getElementById('menu-content');
