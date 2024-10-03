@@ -30,7 +30,7 @@
                 <label for="image">Image:</label>
                 <input type="file" id="image" name="image" accept="image/*" required>
             </div>
-            <button type="submit">Add Item</button>
+            <button type="button" onclick="submitForm()">Add Item</button>
         </form>
 
         <div class="search">
@@ -39,7 +39,7 @@
         </div>
 
         <table id="itemTable">
-            <thead>
+            <!-- <thead>
                 <tr>
                     <th>Item Number</th>
                     <th>Item Type</th>
@@ -51,7 +51,7 @@
             </thead>
             <tbody>
                 <!-- Items will be dynamically added here -->
-            </tbody>
+            <!-- </tbody> --> 
         </table>
     </div>
     <script src="Scripts/itemScripts.js"></script>

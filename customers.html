@@ -28,33 +28,18 @@
                     <label for="address">Address:</label>
                     <textarea id="address" name="address" required></textarea>
                 </div>
-                <button type="submit">Add Customer</button>
+                <button type="button" onclick="submitForm()">Add Customer</button>
             </form>
         </div>
         <div class="table-container">
         <h2>Customer List</h2>
         <input type="text" id="searchInput" placeholder="Search by name..." onkeyup="searchCustomer()">
         <table id="customerTable">
-            <!-- <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Actions</th>
-                </tr>
-            </thead> 
-            <tbody>
-                
-            </tbody> -->
         </table>
     </div>
 
     </div>
     
-
-    
-
     <script src="Scripts/customerScript.js"></script>
 </body>
 </html>
