@@ -2,9 +2,11 @@ let items = [];
 
 async function loadItems() {
     items=await(await fetch ("json/items.json")).json();
+    localStorage.setItem("items", JSON.stringify(items));
 }
 function loadInitial() {
   if (JSON.parse(localStorage.getItem("items")) == null) {
+    
     loadItems();
   } else {
     items = JSON.parse(localStorage.getItem("items"));
