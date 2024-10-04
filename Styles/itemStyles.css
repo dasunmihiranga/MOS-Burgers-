@@ -65,6 +65,11 @@ button {
 }
 
 
+#btnDelete{
+    background-color: rgb(206, 24, 24) !important;
+    box-shadow: 1px 1px 1px 2px #8a0d0d;
+}
+
 
 .search {
     margin: 20px 0;

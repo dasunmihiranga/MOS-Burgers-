@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function init(){
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
 
     // Calculate customers with most orders
@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, {});
 
     // Sort customers by order count in descending order
+
     const sortedCustomers = Object.entries(customerOrderCount).sort((a, b) => b[1] - a[1]);
 
     const customerTableBody = document.getElementById('customerTable').getElementsByTagName('tbody')[0];
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Calculate most popular items
+
     const itemCount = orders.reduce((acc, order) => {
         order.items.forEach(item => {
             if (!acc[item.name]) {
@@ -32,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, {});
 
     // Sort items by quantity in descending order
+
     const sortedItems = Object.entries(itemCount).sort((a, b) => b[1] - a[1]);
 
     const itemTableBody = document.getElementById('itemTable').getElementsByTagName('tbody')[0];
@@ -43,4 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         itemTableBody.appendChild(row);
     });
-});
+}
+
+window.onload = function () {
+    init();
+};

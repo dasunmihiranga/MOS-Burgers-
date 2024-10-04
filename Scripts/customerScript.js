@@ -85,8 +85,6 @@ function searchCustomer() {
     customerTable.innerHTML = body;
 }
 
-
-
 function loadTable() {
         const customerTable = document.getElementById('customerTable');
         const customers = JSON.parse(localStorage.getItem('customers')) || [];

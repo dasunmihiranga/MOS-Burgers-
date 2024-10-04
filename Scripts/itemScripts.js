@@ -97,7 +97,7 @@ function loadTable() {
                 <td><img src="${item.imageUrl}" alt="${item.name}" class="item-image"></td>
                 <td class="actions">
                     <button onclick="editItem(${index})" class="button">Edit</button>
-                    <button onclick="deleteItem(${index})" class="button">Delete</button>
+                    <button onclick="deleteItem(${index})" id="btnDelete"  class="button">Delete</button>
                 </td>
             </tr>
             `;
@@ -146,8 +146,8 @@ function searchItem() {
          <td>${item.price}</td>
          <td><img src="${item.imageUrl}" alt="${item.name}" class="item-image"></td>
          <td class="actions">
-             <button onclick="editItem(${index})" class="button">Edit</button>
-             <button onclick="deleteItem(${index})" class="button">Delete</button>
+             <button onclick="editItem(${index})" class="button" >Edit</button>
+             <button onclick="deleteItem(${index})" id="btnDelete" class="button">Delete</button>
          </td>
      </tr>
      `;

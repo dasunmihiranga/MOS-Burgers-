@@ -45,10 +45,19 @@ body {
     gap: 10px;
     border-radius: 20px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /*Optional shadow for depth */
     backdrop-filter: blur(10px); /* Frosted glass blur effect */
     color: white; /* Text color to stand out on the frosted background */
     transition: transform 0.3s ease; /*Animation for hover effect */
+}
+
+  #menu-content div button{
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 2px #3b7e3d;
   }
   
 
@@ -97,12 +106,12 @@ body {
     justify-content: space-between;
     margin-bottom: 1rem;
 
-    background: rgba(151, 142, 142, 0.2); /* Semi-transparent background */
+    /* background: rgba(250, 9, 9, 0.2); Semi-transparent background */
     gap: 10px;
     border-radius: 20px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
-    backdrop-filter: blur(10px); /* Frosted glass blur effect */
+    backdrop-filter: blur(10px); /*Frosted glass blur effect */
     color: white; /* Text color to stand out on the frosted background */
     transition: transform 0.3s ease; /*Animation for hover effect */
 
@@ -139,6 +148,19 @@ body {
     font-weight: bold;
 }
 
+button {
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: large;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+
+}
+#calculateTotal{
+    background-color: #33a4d8;
+
+}
 /* Media Queries for responsiveness */
 
 /* Tablets and up (min-width: 768px) */

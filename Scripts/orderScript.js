@@ -1,4 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
+
+function init(){
+    
     const orderTable = document.getElementById('orderTable');
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
     
@@ -28,5 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         orderTable.innerHTML=body;;
     });
-});
+}
+
+window.onload = function () {
+    init();
+};
+  
 

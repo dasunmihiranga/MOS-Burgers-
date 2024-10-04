@@ -3,9 +3,17 @@ let items = [];
 async function loadItems() {
     items=await(await fetch ("json/items.json")).json();
 }
+function loadInitial() {
+  if (JSON.parse(localStorage.getItem("items")) == null) {
+    loadItems();
+  } else {
+    items = JSON.parse(localStorage.getItem("items"));
+    
+  }
+}
 
-let cart = [];
-let orders = JSON.parse(localStorage.getItem("orders")) || []; // Array to store all orders
+let cart =[];
+let orders = JSON.parse(localStorage.getItem("orders")) || []; 
 
 function renderMenu(items){
     const menuContent = document.getElementById("menu-content");
@@ -49,10 +57,10 @@ function renderMenu(filterItems) {
   
 }
 
+
 async function filterCategory(category) {
 
   if (category == "All") {
-    const filterItems = null;
     renderMenu(items);
   } else {
     let filterItems=items.filter((item) => item.itemtype === category);
@@ -66,6 +74,8 @@ function addToCart(index) {
 
   const item = items[index];
   const cartItem = cart.find((cartItem) => cartItem.index === index);
+  console.log("card items"+cartItem);
+  
   if (cartItem) {
     cartItem.quantity++;
   } else {
@@ -120,6 +130,8 @@ function showTotal() {
   document.getElementById("totalPrice").textContent = `${total.toFixed(2)}`;
 }
 
+
+
 function placeOrder() {
   const customerName = document.getElementById("customerName").value;
   const contactNo = document.getElementById("contactNo").value;
@@ -131,7 +143,7 @@ function placeOrder() {
     return;
   }
 
-  let order = {
+  const order = {
     customerName,
     contactNo,
     items: cart.map((cartItem) => ({
@@ -141,7 +153,10 @@ function placeOrder() {
     })),
     discount,
     totalPrice,
+
+    
   };
+
 
   orders.push(order); // Add order to the orders array
   console.log("Order placed:", orders);
@@ -153,6 +168,7 @@ function placeOrder() {
   document.getElementById("contactNo").value = "";
   document.getElementById("discount").value = "";
   renderCart();
+  printBill(order);
 }
 
 document.getElementById("calculateTotal").addEventListener("click", showTotal);
@@ -215,7 +231,185 @@ document.addEventListener("click", (event) => {
 });
 
 window.onload =   async function () {
-    await loadItems();
+     await loadInitial();
      filterCategory('All');
-   };
+};
+
+
+//! Bill Print 
+window.printBill = function (order) {
+  const total = order.totalPrice;
+  const date = new Date().toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+  });
+
+  const billContent = `
+          <html>
+          <head>
+              <title>MOS Burgers Bill</title>
+              <style>
+                  body {
+                      font-family: Arial, sans-serif;
+                      margin: 0;
+                      padding: 20px;
+                      background-color: #f5f5f5;
+                  }
+                  .bill-container {
+                      max-width: 600px;
+                      margin: 0 auto;
+                      background-color: white;
+                      padding: 30px;
+                      border-radius: 8px;
+                      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                  }
+                  .bill-header {
+                      text-align: center;
+                      margin-bottom: 20px;
+                  }
+                  .company-name {
+                      font-size: 28px;
+                      font-weight: bold;
+                      color: #f9b209;
+                  }
+                  .bill-title {
+                      font-size: 20px;
+                      color: #333;
+                  }
+                  .bill-details {
+                      margin: 20px 0;
+                      padding: 15px 0;
+                      border-top: 1px solid #ddd;
+                      border-bottom: 1px solid #ddd;
+                  }
+                  .detail-row {
+                      display: flex;
+                      justify-content: space-between;
+                      margin: 5px 0;
+                      color: #555;
+                  }
+                  .items-table {
+                      width: 100%;
+                      border-collapse: collapse;
+                      margin: 20px 0;
+                  }
+                  .items-table th,
+                  .items-table td {
+                      padding: 10px 5px;
+                      border-bottom: 1px solid #ddd;
+                      text-align: left;
+                      color: #333;
+                  }
+                  .items-table th {
+                      font-weight: bold;
+                  }
+                  .total-section {
+                      margin-top: 20px;
+                      padding-top: 15px;
+                      border-top: 1px solid #ddd;
+                  }
+                  .total-row {
+                      display: flex;
+                      justify-content: space-between;
+                      font-size: 18px;
+                      font-weight: bold;
+                      color: #f9b209;
+                  }
+                  .thank-you {
+                      text-align: center;
+                      margin-top: 20px;
+                      font-size: 16px;
+                      color: #f9b209;
+                  }
+                  .footer {
+                      margin-top: 30px;
+                      text-align: center;
+                      color: #888;
+                      font-size: 14px;
+                  }
+                  @media print {
+                      body {
+                          background-color: white;
+                      }
+                      .bill-container {
+                          box-shadow: none;
+                      }
+                  }
+              </style>
+          </head>
+          <body>
+              <div class="bill-container">
+                  <div class="bill-header">
+                      <div class="company-name">MOS BURGERS</div>
+                      <div class="bill-title">SALES INVOICE</div>
+                  </div>
+                  
+                  <div class="bill-details">
+                      <div class="detail-row">
+                          <span>Date:</span>
+                          <span>${date}</span>
+                      </div>
+                      <div class="detail-row">
+                          <span>Customer:</span>
+                          <span>${order.customerName}</span>
+                      </div>
+                  </div>
+
+                  <table class="items-table">
+                      <thead>
+                          <tr>
+                              <th>Item</th>
+                              <th>Qty</th>
+                              <th>Price</th>
+                              <th>Total</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          ${order.items
+                              .map(
+                                  (item) => `
+                              <tr>
+                                  <td>${item.name}</td>
+                                  <td>${item.quantity}</td>
+                                  <td>Rs.${parseFloat(item.price).toFixed(
+                                      2
+                                  )}</td>
+                                  <td>Rs.${(
+                                      parseFloat(item.price) * item.quantity
+                                  ).toFixed(2)}</td>
+                              </tr>
+                          `
+                              )
+                              .join("")}
+                      </tbody>
+                  </table>
+
+                  <div class="total-section">
+                      <div class="total-row">
+                          <span>Total Amount:</span>
+                          <span>Rs.${total.toFixed(2)}</span>
+                      </div>
+                  </div>
+
+                  <div class="thank-you">
+                      Thank you!
+                  </div>
+                  
+                  <div class="footer">
+                      <p>MOS Burgers</p>
+                      <p> 🌐 www.mosburgers.lk</p>
+                  </div>
+              </div>
+          </body>
+          </html>
+      `;
+
+  const printWindow = window.open("", "", "height=800,width=800");
+  printWindow.document.write(billContent);
+  printWindow.document.close();
+  printWindow.print();
+};
    
